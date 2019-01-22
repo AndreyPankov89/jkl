@@ -1,0 +1,8 @@
+.edit-form-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(e,e,e,0.7);
+}
