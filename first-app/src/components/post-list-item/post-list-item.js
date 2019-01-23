@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import EditForm from '../edit-form';
+
 import './post-list-item.css';
 
 export default class PostListItem extends Component{
@@ -59,6 +59,7 @@ export default class PostListItem extends Component{
         
         //const {label} = this.props;
         const {important, like, label, edit} = this.state;
+        const {OnEdit,id} = this.props;
         let classNames = "app-list-item d-flex justify-content-between";
         let hide = "hide";
         let editForm = "edit-form"
@@ -98,7 +99,7 @@ export default class PostListItem extends Component{
                         <button
                             type='button'
                             className="btn edit-btn"
-                            onClick={this.onSubmit}>
+                            onClick={()=> {OnEdit(id,label);this.onSubmit()}}>
                             Изменить
                         </button>
                     </form>

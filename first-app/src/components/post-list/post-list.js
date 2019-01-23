@@ -4,19 +4,18 @@ import PostListItem from '../post-list-item';
 
 import './post-list.css'
 
-const PostList = ({posts}) => {
+const PostList = ({posts, OnEdit}) => {
 
-    const elements = posts.map((item) => {
-        if (typeof(item) === 'object'){
-            const {id, ...itemProps} = item;
+    const elements = posts.filter(item => {return typeof(item)==="object" && !!item}).map((item) => {
+            const {...itemProps} = item;
+            const {id} = itemProps
             return (
                 <li key={id} className="list-group-item">
                     <PostListItem {...itemProps}
+                    OnEdit = {OnEdit}
                     />
                 </li>
             )
-        }
-        return null;
     })
 
     return (

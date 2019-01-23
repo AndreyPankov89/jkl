@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
@@ -8,28 +8,46 @@ import PostAddForm from '../post-add-form';
 
 import './app.css'
 
-const App = () => {
+export default class App extends Component{
 
-    const data = [
-        1,
-        {label: "Going To learn React", important: true, id: "qwer"},
-        {label: "That is so good", important: false, id: "rtyu"},
-        {label: "I need a break...", important: false, id: "poiu"},
-    ];
+    constructor(props){
+        super(props);
+        this.state = {
+            date: [
+                    1,
+                    {label: "Going To learn React", important: true, id: "qwer"},
+                    {label: "That is so good", important: false, id: "rtyu"},
+                    {label: "I need a break...", important: false, id: "poiu"},
+                ]
+        }
+    }
 
-    return ( 
-        <div className='app'>
-            <AppHeader/>
-            <div className="search-panel d-flex">
-                <SearchPanel/>
-                <PostStatusFilter/>
+    editItem = (id,label) => {
+        this.setState(({date}) => {
+            const index = date.findIndex(item => item.id === id);
+            console.log(index,id);
+            const newArr = [...date.slice(0,index), {id, label}, ...date.slice(index+1)];
+            return {date : newArr};
+        });
+    }
+
+    render(){
+        const {date}=this.state 
+
+        return ( 
+            <div className='app'>
+                <AppHeader/>
+                <div className="search-panel d-flex">
+                    <SearchPanel/>
+                    <PostStatusFilter/>
+                </div>
+
+                <PostList posts={date} OnEdit={this.editItem}/>
+                <PostAddForm/>
             </div>
 
-            <PostList posts={data}/>
-            <PostAddForm/>
-        </div>
+        )
+    }
 
-    )
+
 }
-
-export default App
