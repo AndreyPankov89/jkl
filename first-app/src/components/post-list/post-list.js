@@ -6,7 +6,7 @@ import './post-list.css'
 
 const PostList = ({posts, OnEdit}) => {
 
-    const elements = posts.filter(item => {return typeof(item)==="object" && !!item}).map((item) => {
+    const elements = posts.filter(item => {return item instanceof Object && "label" in item && !!item}).map((item) => {
             const {...itemProps} = item;
             const {id} = itemProps
             return (

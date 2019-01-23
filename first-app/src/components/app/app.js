@@ -14,7 +14,9 @@ export default class App extends Component{
         super(props);
         this.state = {
             date: [
-                    1,
+                    [],
+                    2,
+                    'kkk',
                     {label: "Going To learn React", important: true, id: "qwer"},
                     {label: "That is so good", important: false, id: "rtyu"},
                     {label: "I need a break...", important: false, id: "poiu"},
