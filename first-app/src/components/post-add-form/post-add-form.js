@@ -1,21 +1,36 @@
 import React from 'react';
 import './post-add-form.css';
+import styled from 'styled-components';
 
-const PostAddForm = () => {
+const AddBtn = styled.button`
+    border-radius: 5px;
+    background-color: #138496
+    color:white;
+    padding: 6px 12px;
+    transition: all .2s ease;
+    cursor: pointer;
+    :hover{
+        tramsform:translateY(3px);
+    }
+`
+
+const PostAddForm = ({onAdd}) => {
     return (
-        <form className="bottom-panel d-flex">
+        <div className="bottom-panel d-flex">
             <input 
                 type="text"
                 placeholder="О чём вы думаете сейчас?"
                 className="form-control new-post-label"
             />
 
-            <button
+            <AddBtn
                 type='submit'
-                className="btn btn-outline-secondary">
+                //className="btn btn-outline-secondary"
+                onClick={()=>onAdd('test')}
+                >
                 Добавить
-            </button>
-        </form>
+            </AddBtn>
+        </div>
     )
 }
 

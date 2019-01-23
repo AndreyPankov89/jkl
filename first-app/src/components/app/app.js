@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import idGenerator from 'react-id-generator';
 
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
@@ -22,6 +23,21 @@ export default class App extends Component{
                     {label: "I need a break...", important: false, id: "poiu"},
                 ]
         }
+        this.editItem = this.editItem.bind(this);
+
+        this.deleteItem = this.deleteItem.bind(this);
+        this.addItem = this.addItem.bind(this);
+
+
+    }
+
+    deleteItem =  (id) => {
+        this.setState(({date}) => {
+            const index = date.findIndex(item => item.id === id);
+            console.log(index,id);
+            const newArr = [...date.slice(0,index), ...date.slice(index+1)];
+            return {date : newArr};
+        });
     }
 
     editItem = (id,label) => {
@@ -29,6 +45,15 @@ export default class App extends Component{
             const index = date.findIndex(item => item.id === id);
             console.log(index,id);
             const newArr = [...date.slice(0,index), {id, label}, ...date.slice(index+1)];
+            return {date : newArr};
+        });
+    }
+
+    addItem = (label) => {
+        const id = idGenerator();
+        console.log(id);
+        this.setState(({date}) => {
+            const newArr = [...date, {id, label, important:false},];
             return {date : newArr};
         });
     }
@@ -44,8 +69,13 @@ export default class App extends Component{
                     <PostStatusFilter/>
                 </div>
 
-                <PostList posts={date} OnEdit={this.editItem}/>
-                <PostAddForm/>
+                <PostList posts={date} 
+                    OnEdit={this.editItem}
+                    OnDelete={this.deleteItem}
+                    />
+                <PostAddForm
+                    onAdd = {this.addItem}
+                />
             </div>
 
         )
