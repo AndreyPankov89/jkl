@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import idGenerator from 'react-id-generator';
 
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
@@ -27,8 +26,11 @@ export default class App extends Component{
 
         this.deleteItem = this.deleteItem.bind(this);
         this.addItem = this.addItem.bind(this);
+    }
 
 
+    generateId = ( length=15, prefix='') =>{
+        return `prefix-${Math.random().toString(36).substr(5,length)}`;
     }
 
     deleteItem =  (id) => {
@@ -50,7 +52,7 @@ export default class App extends Component{
     }
 
     addItem = (label) => {
-        const id = idGenerator();
+        const id = this.generateId(5);
         console.log(id);
         this.setState(({date}) => {
             const newArr = [...date, {id, label, important:false},];

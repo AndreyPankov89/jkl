@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ConfirmDialog from '../confirm-dialog';
 
 import './post-list-item.css';
 
@@ -115,12 +116,13 @@ export default class PostListItem extends Component{
                         onClick={this.onImportant}>
                         <i className="fa fa-star"></i>
                     </button>
-                    <button 
+                    <ConfirmDialog id = {id} label={label} OnDelete={OnDelete}/>
+                    {/* <button 
                         type="button" 
                         className="btn-trash btn-small"
                         onClick={()=>OnDelete(id)}>
                         <i className="fa fa-trash-o"></i>
-                    </button>   
+                    </button>    */}
                         <i className="fa fa-heart"></i>
                 </div>
                 
