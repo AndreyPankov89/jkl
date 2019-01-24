@@ -19,9 +19,9 @@ export default class PostListItem extends Component{
     }
 
     toggle() {
-        this.setState({
+        this.setState(({modal}) =>({
         modal: !this.state.modal
-        });
+        }));
     }
 
     render() {

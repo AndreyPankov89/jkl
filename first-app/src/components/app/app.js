@@ -104,7 +104,8 @@ export default class App extends Component{
         return items;
 
         return items.filter((item) => {
-            return item.label.indexOf(term) > -1;
+            const lowerLabel = item.label.toLowerCase();
+            return lowerLabel.indexOf(term.toLowerCase()) > -1;
         })
     }
     filterPost(items,filter){
