@@ -31,7 +31,7 @@ export default class PostListItem extends Component{
         <div>
             <MyBtn onClick={this.toggle}> <i className="fa fa-trash-o"></i></MyBtn>
             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-            <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+            <ModalHeader toggle={this.toggle}>Удалить эту запись?</ModalHeader>
             <ModalBody>
                 {label}
             </ModalBody>
