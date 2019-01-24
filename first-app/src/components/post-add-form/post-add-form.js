@@ -1,4 +1,4 @@
-import React from 'react';
+import React , {Component} from 'react';
 import './post-add-form.css';
 import styled from 'styled-components';
 
@@ -14,24 +14,52 @@ const AddBtn = styled.button`
     }
 `
 
-const PostAddForm = ({onAdd}) => {
-    return (
-        <div className="bottom-panel d-flex">
-            <input 
-                type="text"
-                placeholder="О чём вы думаете сейчас?"
-                className="form-control new-post-label"
-            />
+export default class PostAddForm extends Component{
 
-            <AddBtn
-                type='submit'
-                //className="btn btn-outline-secondary"
-                onClick={()=>onAdd('test')}
-                >
-                Добавить
-            </AddBtn>
-        </div>
-    )
+    constructor(props){
+        super(props);
+
+        this.state={
+            inputValue:""
+        }
+
+        this.onValueChange = this.onValueChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this)
+    }
+
+
+    onValueChange(e){
+        this.setState({inputValue: e.target.value})
+    }
+
+    onSubmit(e){
+        e.preventDefault();
+        if (this.state.inputValue !==""){
+            this.props.onAdd(this.state.inputValue);
+        }
+        this.setState({inputValue: ""})
+    }
+
+    render(){
+        return (
+            <form
+             className="bottom-panel d-flex"
+             onSubmit={this.onSubmit}>
+                <input 
+                    type="text"
+                    placeholder="О чём вы думаете сейчас?"
+                    className="form-control new-post-label"
+                    onChange = {this.onValueChange}
+                    value={this.state.inputValue}
+                />
+
+                <AddBtn
+                    type='submit'
+                    //className="btn btn-outline-secondary"
+                    >
+                    Добавить
+                </AddBtn>
+            </form>
+        )
+    }
 }
-
-export default PostAddForm;

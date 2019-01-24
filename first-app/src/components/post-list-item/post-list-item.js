@@ -8,29 +8,12 @@ export default class PostListItem extends Component{
     constructor(props){
         super(props);
         this.state = {
-            important: false,
-            like: false,
-            label: props.label,
             edit: false
         }
 
-        this.onImportant = this.onImportant.bind(this);
-        this.onLike = this.onLike.bind(this);
         this.onEdit = this.onEdit.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.onChange = this.onChange.bind(this);
-    }
-
-    onImportant(){
-        this.setState(({important}) => ({
-            important : !important
-        }))
-    }
-
-    onLike(){
-        this.setState(({like}) => ({
-            like : !like
-        }))
     }
 
     onEdit(){
@@ -59,8 +42,8 @@ export default class PostListItem extends Component{
         const tekDate =`${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
         
         //const {label} = this.props;
-        const {important, like, label, edit} = this.state;
-        const {OnEdit,OnDelete,id} = this.props;
+        const {edit} = this.state;
+        const {label,important,like,OnEdit,OnDelete,OnToggleImportant,OnToggleLiked,id} = this.props;
         let classNames = "app-list-item d-flex justify-content-between";
         let hide = "hide";
         let editForm = "edit-form"
@@ -80,7 +63,7 @@ export default class PostListItem extends Component{
         return (
             <div className={classNames}>
                 <span className="label-wrapper">
-                    <span className="app-list-item-label" onClick={this.onLike}>
+                    <span className="app-list-item-label" onClick={() =>{ OnToggleLiked(id)}}>
                         {label}
                     </span>
                     <span className="app-list-item-data">
@@ -113,7 +96,7 @@ export default class PostListItem extends Component{
                     <button 
                         type="button" 
                         className="btn-star btn-small" 
-                        onClick={this.onImportant}>
+                        onClick={() =>{OnToggleImportant(id)}}>
                         <i className="fa fa-star"></i>
                     </button>
                     <ConfirmDialog id = {id} label={label} OnDelete={OnDelete}/>
